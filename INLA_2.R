@@ -57,3 +57,19 @@ r_squared <- 1 - (ss_resid / ss_total)
 cat(sprintf("\nINLA RMSE: %.4f\n", rmse))
 cat(sprintf("INLA MAE: %.4f\n", mae))
 cat(sprintf("INLA R^2: %.4f\n", r_squared))
+
+
+#Plot posterior densities
+par(mfrow = c(2, 3))
+for (coef_name in names(inla_model$marginals.fixed)) {
+  plot(
+    inla_model$marginals.fixed[[coef_name]],
+    type = "l",
+    xlab = coef_name,
+    ylab = "Density",
+    main = paste("INLA Posterior Density:", coef_name),
+    col = "blue",
+    lwd = 2
+  )
+}
+par(mfrow = c(1, 1))
