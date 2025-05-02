@@ -20,7 +20,7 @@ The project includes:
 
 - `mcmc_model.R`: MCMC sampling code
 - `inla_model.R`: INLA model specification and execution
-- `housing_data.csv`: Cleaned dataset (if allowed)
+- `housing_data.csv`: Cleaned dataset 
 - `report.tex`: Final report in LaTeX format
 - `figures/`: Plot outputs for report
 
