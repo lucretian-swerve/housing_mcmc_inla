@@ -1,3 +1,5 @@
+set.seed(1234)
+
 # Load and preprocess data
 housing <- read.csv("house.txt")
 housing <- housing[c("price", "bedrooms", "bathrooms", "sqft_living", "grade", "sqft_above")]
@@ -163,4 +165,4 @@ cat(sprintf("Test R^2: %.4f\n", r_squared))
 
 # Calculate and print elapsed time
 elapsed_time <- end_time - start_time
-cat(sprintf("\nElapsed Time for INLA: %.2f seconds\n", as.numeric(elapsed_time, units="secs")))
+cat(sprintf("\nElapsed Time for MCMC: %.2f seconds\n", as.numeric(elapsed_time, units="secs")))
