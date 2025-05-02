@@ -1,4 +1,5 @@
 library(INLA)
+set.seed(1234)
 
 # Load and prep data
 housing <- read.csv("house.txt")
@@ -15,6 +16,9 @@ housing$train[train_idx] <- 1
 housing_train <- housing[housing$train == 1, ]
 housing_test <- housing[housing$train == 0, ]
 
+# Set timer
+start_time <- Sys.time()
+
 # Fit INLA model on training data only
 inla_model <- inla(
   log_price ~ bedrooms + bathrooms + sqft_living + grade + sqft_above,
@@ -22,6 +26,7 @@ inla_model <- inla(
   family = "gaussian",
   control.predictor = list(compute = TRUE)
 )
+end_time <- Sys.time()
 
 # Extract posterior summaries for fixed effects
 summary_fixed <- inla_model$summary.fixed
@@ -73,3 +78,8 @@ for (coef_name in names(inla_model$marginals.fixed)) {
   )
 }
 par(mfrow = c(1, 1))
+
+
+# Calculate and print elapsed time
+elapsed_time <- end_time - start_time
+cat(sprintf("\nElapsed Time for INLA: %.2f seconds\n", as.numeric(elapsed_time, units="secs")))
